@@ -25,6 +25,9 @@ once you've started your thread, you need to explicitly decide
 - or leave it to run on itw own  
  (by detaching it - by calling *detach()*)
 
+joining
+-------
+
 one common way to handle the scenario when the tread function holds
 pointers or references to local variables and the thread hasn't 
 finished when the function exits, is to make the tread function
@@ -39,3 +42,13 @@ this breaks the association of the thread with the std::thread object
 and ensures that std::terminate() won't be called when the
 std::thread object is destroyed, even the thread is still running
 in the brackground
+
+detaching
+---------
+
+you can only call *t.detach()* for a std::thread object t when
+*t.joinable()* return true
+
+after the call completes, the std::thread object is no longer 
+associated with the actual thread of execution and is therefore
+no longer joinable
