@@ -76,3 +76,16 @@ if you want to move an object (e.g., std::unique_ptr) "to a thread",
 you must use std::move
 
 threads are *movable* but not *copyable*
+
+
+transferring ownership of a thread
+----------------------------------
+
+threads are *movable* but not *copyable*
+
+but you can't just "drop" a thread by assigning a new value to
+the std::thread object that manages it
+
+likewise, if ownership should be transferred into a function, it can
+just accept an instance of std::thread by value as one of the
+parameters
