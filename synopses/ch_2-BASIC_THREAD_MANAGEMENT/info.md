@@ -25,6 +25,7 @@ once you've started your thread, you need to explicitly decide
 - or leave it to run on itw own  
  (by detaching it - by calling *detach()*)
 
+
 joining
 -------
 
@@ -43,6 +44,7 @@ and ensures that std::terminate() won't be called when the
 std::thread object is destroyed, even the thread is still running
 in the brackground
 
+
 detaching
 ---------
 
@@ -52,3 +54,25 @@ you can only call *t.detach()* for a std::thread object t when
 after the call completes, the std::thread object is no longer 
 associated with the actual thread of execution and is therefore
 no longer joinable
+
+
+passing arguments to a thread function
+--------------------------------------
+
+passing arguments to a thread function is as simple as passing 
+additional arguments to the std::thread constructor;  
+but by default the arguments are *copied* into an internal storage;
+even if the corresponding parameter in the function is expecting
+a reference
+
+references are also copied, so when you pass a reference, a thread
+will create a copy of object referenced by reference and then create
+a reference to this *new just copied* object, if you want to pass
+really a reference use std::ref(ref_name), but you must remember
+of scoping of refs (the initial ref must exist in the memory before
+thread will finish its work)
+
+if you want to move an object (e.g., std::unique_ptr) "to a thread",
+you must use std::move
+
+threads are *movable* but not *copyable*
