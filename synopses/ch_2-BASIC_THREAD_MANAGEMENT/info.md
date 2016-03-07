@@ -98,3 +98,19 @@ the function "std::thread::hardware_concurrency()" returns an
 indication of the number of threads that can truly run concurrently
 for a give execution of a program
 
+
+indentifying threads
+--------------------
+
+thread identifiers are of type *std::thread::id* and can be 
+retrieved in two ways:
+- the identifier for a thread can be obtained from its associated
+  std::thread object by calling the *get_id()* member function;  
+  if the std::thread object doesn't have an associated thread 
+  of execution, the call to *get_id()* returns a default
+  constructed *std::thread::id* object, which indicates 
+  "not any thread"
+- the identifier for the current thread can be obtained by calling
+  *std::this_thread::get_id()*, which is also defined in the <thread>
+  header
+
