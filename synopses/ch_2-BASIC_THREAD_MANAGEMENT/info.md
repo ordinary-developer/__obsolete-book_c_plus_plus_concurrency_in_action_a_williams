@@ -89,3 +89,12 @@ the std::thread object that manages it
 likewise, if ownership should be transferred into a function, it can
 just accept an instance of std::thread by value as one of the
 parameters
+
+
+choosing the number of threads at runtime
+-----------------------------------------
+
+the function "std::thread::hardware_concurrency()" returns an 
+indication of the number of threads that can truly run concurrently
+for a give execution of a program
+
