@@ -7,7 +7,7 @@ for the book  **"C++ concurrency in action"**
 by **Anthony Williams**.
 
  
-[here is the link to amazon](http://www.amazon.com/C-Concurrency-Action-Practical-Multithreading/dp/1933988770) 
+[Here is the link to amazon](http://www.amazon.com/C-Concurrency-Action-Practical-Multithreading/dp/1933988770). 
 
 
 Installation
@@ -38,4 +38,4 @@ Contributing
 ------------
 
 This project doesn't need to be contributed,
-but just in case you can always connect with me
+but just in case you can always connect with me.
