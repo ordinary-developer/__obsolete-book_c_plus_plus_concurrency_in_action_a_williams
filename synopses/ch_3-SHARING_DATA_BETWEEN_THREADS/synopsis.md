@@ -122,3 +122,16 @@ for you*.
 - Use a lock hierarchy
 
 
+Transferring mutex ownership between scopes
+--------------------------------------------
+
+std::unique_lock is an example of a type that's *movable*
+but not *copyable*. It can be used for transferring mutex ownership
+between scopes
+
+
+You must bear in mind two issues:
+- *in general, a lock should be held for only the minimum possible
+   time needed to perform the required operations*;
+- *if you don't hold the required locks for the entire duration
+   of anoperation, you're exposing yourself to race condition*.
