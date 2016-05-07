@@ -135,3 +135,26 @@ You must bear in mind two issues:
    time needed to perform the required operations*;
 - *if you don't hold the required locks for the entire duration
    of anoperation, you're exposing yourself to race condition*.
+
+
+Alternative facilities for protecting shared data
+--------------------------------------------------
+
+One particularly extreme (but remarkably common) case is where the 
+shared data needs protection only from concurrent access while it's
+being initialized, but after that no explicit syncronization is
+required.
+
+It's for this reason that the C++ Standard provides a mechanism 
+purely for protecting shared data during initialization.
+
+The C++ Standard Library provides std::once_flag and std::call_once
+to handle this situation. Rather than locking a mutex and explicitly
+checking the pointer, every thread can just use std::call_once, 
+safe in knowledge that the pointer will have been initialized by 
+some thread (in a properly synchronized fashion) by the time
+std::call_once returns.
+
+std::once_flag instances can't be copied or moved, so if you use them
+as a class member like this, you'll have to explicitly define these
+special member functions should you require them.
