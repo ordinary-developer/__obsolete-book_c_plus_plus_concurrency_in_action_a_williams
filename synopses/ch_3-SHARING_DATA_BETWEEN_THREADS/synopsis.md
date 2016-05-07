@@ -158,3 +158,23 @@ std::call_once returns.
 std::once_flag instances can't be copied or moved, so if you use them
 as a class member like this, you'll have to explicitly define these
 special member functions should you require them.
+
+
+Static variable initialization
+------------------------------
+
+One scenario where there's a potential race condition over 
+initializaation is that of a local variable declared with static.
+The initialization of such a variable is defined to occur the first
+time control passes through its declaration; for multiple threads
+calling the function, this means there's the potential for a race
+condition to define first.
+
+On may pre-C++11 compilers this race condition is problematic in
+practic.
+
+In C++11 this problem is solved: the initialization is defined to 
+happen on exactly one thread, and no other threads will proceed
+until that initialization is complete, so the race condition is just
+over which thread gets to do the initialization rather anything more
+problematic.
