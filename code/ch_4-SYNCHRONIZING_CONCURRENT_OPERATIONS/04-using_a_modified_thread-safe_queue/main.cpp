@@ -46,15 +46,15 @@ data_chunk prepare_data(unsigned int i) {
 }
 
 bool more_data_to_prepare(unsigned int counter) {
-    const unsigned int upperBound = 1;
+    const unsigned int upperBound = 10;
     return (upperBound != counter); 
 }
 
 void process(data_chunk&) { }
 
 bool is_last_chunk(data_chunk& data) {
-    const unsigned int upperBound = 1;
-    return (upperBound == data.number);
+    const unsigned int upperBound = 10;
+    return ((upperBound - 1)== data.number);
 }
 
 
