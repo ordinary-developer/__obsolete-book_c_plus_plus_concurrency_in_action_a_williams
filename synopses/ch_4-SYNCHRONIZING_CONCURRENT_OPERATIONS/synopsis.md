@@ -97,3 +97,39 @@ std::launch, and can either be
   to indicate that the implementation may choose
   (this option is default).
 
+
+std::packaged_task
+------------------
+
+std::packaged_task<> ties a future to a function or callable object.
+When std::packaged_task<> object is invoked, it calls the 
+associated function or callable object and makes the future ready,
+with the return value stored as the associated data.
+
+The template parameter for thestd::packaged_task<> class template 
+is a function signature. When you construct an instance of 
+std::packaged_task, you must pass in a function or callable object
+that can accept the specified parameters and that returns a type
+convertible to the specified return type.
+
+The retur type of the specified function signature identifies 
+the type of the std::future<> returned from the get_future() 
+member function, whereas the argument list of the function signature
+is used to specify the signature of the packaged tasks' function
+call operator.
+
+The std::packaged_task object is thus a callable object, and it can
+be wrapped in std::function object, passed to a std::thread as the
+thread function, passed to another function that requires a callable
+object, or even invoked directly.
+
+When the std::packaged_task is invoked as a function object, 
+the arguments supplied to the function call operator are passed on
+to the contained function, and the return value is stored as the
+asynchronous result in the std::future obtained from get_future().
+
+You can thus wrap a task in a std::packaged_task and retrieve 
+the future before passing the std::packaged_task object elsewhere
+to be invoked in due course.
+
+
