@@ -33,3 +33,67 @@ operating system resources, so std::condition_variable should be
 preferred unless the additional flexibility is required.
 
 
+Waiting for one-off events with futures
+---------------------------------------
+
+If a thread needs to wait for a specific one-off event, 
+it somehow obtains a future representing this event. 
+The thread can then periodically wait on the future for short periods
+of time to see if the event has occurred. Once an event has happened
+(and the future has become ready), the future can't be reset.
+
+There are two sorts of futures in C++ Standard Library, implemented
+as two class templates declared in the <future> library header:
+- unique futures (std::future<>);
+- shared futures (std::shared_future<>).
+
+An instance of std::future is the one and only instance that
+refers to its associated event, whereas multiple instances of
+std::shared_future may refer to the same event. In the latter case,
+all the instances will become ready at the same time, and they may 
+all access any data associated with the event.
+
+
+std::async
+----------
+
+You can use std::async to start an *asynchronous task* for which
+you don't need the result rigth away. Rather than giving you back
+a std::thread object to wait on, std::async returns a std::future
+object, which will eventually hold the return value of the function.
+When you need the value, you just call get() on the future, and 
+the thread blocks until the future is ready and then returns the 
+value.
+
+std::async allows you to pass additional arguments to the function
+by adding extra arguments to the call. 
+
+If the first argument is a pointer to a member function, 
+the second argument provides the object on which to apply the member
+function (either directly, or via a pointer, or wrapped in std::ref),
+and the remaining arguments are passed as arguments to the member
+function.
+
+Otherwise, the second and subsequent arguments are passed as arguments
+to the function or callable object specified as the first argument.
+
+Just as with std::thread, if the arguments are rvalues, the copies
+are created by moving the originals. This allow the use of move-only
+types as both the function object and the arguments.
+
+By default, it's up to the implementation wheterh std::async starts 
+a new thread, or whether the task runs synchronously when the future
+is waited for.
+
+You can specify which to use with an additional parameter to 
+std::async before the function to call. This parameter is of the type
+std::launch, and can either be
+- std::launch::deferred  
+  to indicate that the function call deferred until either wait()
+  or get() is called on the future;
+- std::launch::async  
+  to indicate that the function must be run on its own thread;
+- std::launch::deferred | std::launch::async
+  to indicate that the implementation may choose
+  (this option is default).
+
