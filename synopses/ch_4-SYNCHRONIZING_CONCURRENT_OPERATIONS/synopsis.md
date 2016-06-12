@@ -163,3 +163,13 @@ The same happends if you wrap the function in a std::packaged_task -
 when the task is invoked, if the wrapped function throws an exception,
 that exception is stored in the future in place of the result,
 ready to be thrown on a call to get().
+
+
+Exceptions for promises
+-----------------------
+
+If you wish to store an exception rather than a value, you call
+the "set_exception()" member function rather that "set_value()".
+This would typically be used in a "catch" block for an exception
+thrown as part of the algorithm, to populate the promise with
+that exception
