@@ -133,3 +133,19 @@ the future before passing the std::packaged_task object elsewhere
 to be invoked in due course.
 
 
+std::promise
+------------
+
+std::promise<T> provides a means of setting a value (of type T),
+which can later be read through an associated std::future<T> object. 
+A std::promise/std::future pair would provide one possible mechanism
+for this facility; the waiting thread could block on the future,
+while the tread providing the data could use the promise half of 
+the pairing to set the associated value and make the futre ready.
+
+You can obtain the std::future object associated with a given 
+std::promise by calling the get_future() member function, just like
+with std::package_task. When the value of the promise is set
+(using the set_value() member function), the future becomes ready
+and can be used to retrieve the stored value. If you destroy the
+std::promise without setting a value, an exception is stored instead.
