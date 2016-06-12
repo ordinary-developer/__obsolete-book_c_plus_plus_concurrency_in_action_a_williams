@@ -149,3 +149,17 @@ with std::package_task. When the value of the promise is set
 (using the set_value() member function), the future becomes ready
 and can be used to retrieve the stored value. If you destroy the
 std::promise without setting a value, an exception is stored instead.
+
+
+Exceptions for the future
+-------------------------
+
+If the function call invoked as part of std::async throws an 
+exception, that exception is stored in the future in place of a 
+stored value, the future becomes ready, and a call to get()
+rethrows that stored exception.
+
+The same happends if you wrap the function in a std::packaged_task -
+when the task is invoked, if the wrapped function throws an exception,
+that exception is stored in the future in place of the result,
+ready to be thrown on a call to get().
