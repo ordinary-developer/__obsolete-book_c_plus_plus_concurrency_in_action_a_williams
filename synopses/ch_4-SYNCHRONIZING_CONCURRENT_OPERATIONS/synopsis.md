@@ -216,3 +216,22 @@ of std::shared_future with the new facility for automatically deducing
 the type of a variable from its initializer. std::future has a share()
 member function that creates a new std::shared_future and thransfers
 ownership to it directly.
+
+
+Waiting with a time limit
+-------------------------
+
+There are two sorts of timeouts you may wish to specify:
+- a *duration-based* timeout  
+  where you wait for a specific amount of time;
+- an *absolute* timeout  
+  where you wait until a specific point in time.
+
+Most of the waiting functions provide variants that handle both forms
+of timeouts. The variants that handle the duration-based timeouts
+has a "_for" suffix, and those that handle the absolute timeouts 
+have a "_until" suffix.
+
+std::condition_variable has two overloads of the "wait_for()" member
+function and two overloads of the "wait_until()" member function.
+
