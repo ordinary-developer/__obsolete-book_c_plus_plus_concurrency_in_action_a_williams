@@ -71,5 +71,11 @@ assignment and copy-construction cannot be atomic because involve
 two objects.
 
 
+Operations on std::atomic<bool>
+-------------------------------
 
+std::atomic<bool> is still not copy-constructible or copy-assignable,
+you can construct it from a nonatomic bool.
 
+Assignment operators that atomic types support return values
+(of the corresponding nonatomic type) rather than references.
