@@ -79,3 +79,16 @@ you can construct it from a nonatomic bool.
 
 Assignment operators that atomic types support return values
 (of the corresponding nonatomic type) rather than references.
+
+
+Storing a new value (or not) depending on the current value
+-----------------------------------------------------------
+
+compare_exchange_weak() and compare_exchange_strong() member functions
+(compare/exchange operations) compare the value of the atomic variable
+with a supplied expected value and stores the supplied desired value
+if they are equal. If the values aren't equal, the expected value
+is updated with the actual value of the atomic variable. 
+The return type of the compare/exchange functions is a bool, which
+is ture if the store was performed and false otherwise.
+
