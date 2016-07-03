@@ -40,3 +40,36 @@ Operations are divided into three categories:
   - memory_order_seq_cst.
 The default ordering for all operations is "memory_order_seq_cst".
 
+
+
+Operations on std::atomic_flag
+------------------------------
+
+*std::atomic_flag* is the simplest standard atomic type, which 
+represents a Boolean flag. Objects of this type can be in one of 
+two states: set or clear.  
+It is the only type guaranteed to be lock-free.
+
+Objects of type std::atomic_flag must be initialized with
+ATOMIC_FLAG_INIT. This initializes the flag to a clear state.
+
+If the std::atomic_flag object has static storage duration, it will
+always be initialized by the time of the first operation on the flag.
+
+After your flag object initialization, you can
+- destroy it  
+  (calling desctructor);
+- clear it (store operation)  
+  (calling the "clear()" member function);
+- set it and query the previous value (read-modify-write operation)   
+  (calling the "test_and_set()" member function).
+
+You can't copy-construct another std::atomic_flag object from the 
+first, and you can't assign one std::atomic_flag to another.
+All operations on a atomic type are defined as atomic, and 
+assignment and copy-construction cannot be atomic because involve
+two objects.
+
+
+
+
