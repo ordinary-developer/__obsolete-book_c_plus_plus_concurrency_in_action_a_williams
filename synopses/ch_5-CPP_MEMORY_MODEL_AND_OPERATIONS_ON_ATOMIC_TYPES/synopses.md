@@ -114,3 +114,15 @@ It has the next member functions:
 - operator ++;       |
 - operator --      - |
 
+
+The std::atomic<> primary class template
+----------------------------------------
+
+In order to use std::atomic<UDT> for some user-defined type UDT, 
+- this must have a trivial copy-assignment opertor
+  (the type must not have any virtual functions or virtual base 
+   classes and must use the compiler-generated copy-assignment
+   operator);
+- every base class and non-static data member of a 
+  user-defined type must also have a trivial copy-assignment operator;
+- the type must be bitwise equality comparable.
