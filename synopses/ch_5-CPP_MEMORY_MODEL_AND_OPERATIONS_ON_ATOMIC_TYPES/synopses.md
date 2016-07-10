@@ -28,7 +28,7 @@ Operations are divided into three categories:
 - *load* operations, which can have the next types of ordering:
   - memory_order_relaxed;
   - memory_order_consume;
-  - memory_order-acquire;
+  - memory_order_acquire;
   - memory_order_seq_cst;
 - *read-modify-write* operations, which can have the next types
   of ordering:
