@@ -92,3 +92,25 @@ is updated with the actual value of the atomic variable.
 The return type of the compare/exchange functions is a bool, which
 is ture if the store was performed and false otherwise.
 
+
+Operations on std::atomic<T*>: pointer arithmetic
+-------------------------------------------------
+
+The atomic form of a pointer to some type T is std::atomic<T*>.
+It is neither copy-constructible nor copy-assignable, although it
+can be both constructed and assigned from the suitable pointer values.
+
+It has the next member functions:
+- is_lock_free();
+- load();
+- store();
+- exchange();
+- compare_exchange_weak();
+- compare_exchange_stro();
+- fetch_add();     - |
+- fetch_sub();       | 
+- operator +=;       | pointer arithmetic
+- operator -=;       | operations
+- operator ++;       |
+- operator --      - |
+
