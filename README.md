@@ -19,13 +19,15 @@ Simply copy (clone the repository) and see and read it.
 Basic usage
 -----------
  
-`$ git clone
-https://gitlab.com/book_synopses_and_code_samples/c_plus_plus_concurrency_in_action_a_williams.git`
+```
+$ git clone https://gitlab.com/book_synopses_and_code_samples/c_plus_plus_concurrency_in_action_a_williams.git
+```
 
 or
 
-`$ git clone
-https://github.com/ordinary-developer/book_c_plus_plus_concurrency_in_action_a_williams.git`
+```
+$ git clone https://github.com/ordinary-developer/book_c_plus_plus_concurrency_in_action_a_williams.git
+```
 
  
 License
