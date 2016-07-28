@@ -39,5 +39,4 @@ This project is offered under the MIT license.
 Contributing
 ------------
 
-This project doesn't need to be contributed,
-but just in case you can always connect with me.
+This project is a study project and doesn't need to be contributed.
