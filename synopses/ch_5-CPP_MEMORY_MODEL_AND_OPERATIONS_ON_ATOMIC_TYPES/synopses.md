@@ -153,3 +153,29 @@ The happens-before relationship
 
 The happens-before relationship means: if one operation is 
 sequenced before another, then it also happens-before it.
+
+
+Memory ordering for atomic operations
+-------------------------------------
+
+There are six memory ordering options that can be applied to
+operations on atomic types:
+- memory_order_relaxed;
+- memory_order_consume;
+- memory_order_acquire;
+- memory_order_release;
+- memory_order_acq_rel;
+- memory_order_seq_cst.
+
+The default memory-ordering option for all operations on atomic types
+is *memory_order_seq_cst*
+(the most stringent of the available options).
+
+Although there are siz ordering options, they represent three models:
+- *sequentially consistent* ordering  
+  (memory_order_seq_cst)
+- *acquire-release* ordering  
+  (memory_order_consume, memory_order_arcuire, memory_order_release,
+   memory_order_acq_rel)
+- *relaxed* ordering  
+  (memory_order_relaxed)
