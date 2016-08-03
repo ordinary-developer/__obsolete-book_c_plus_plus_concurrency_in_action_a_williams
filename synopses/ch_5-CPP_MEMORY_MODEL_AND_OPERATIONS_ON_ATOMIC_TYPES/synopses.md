@@ -146,3 +146,10 @@ thread that performed the initial write *W*, or a sequence of atomic
 read-modify-write operations on *x* (such as *fetch_add()* or
 *compare_exchange_weak()*) by any thread, where value read by
 the first thread in the sequence is the value written by *W*.
+
+
+The happens-before relationship
+-------------------------------
+
+The happens-before relationship means: if one operation is 
+sequenced before another, then it also happens-before it.
