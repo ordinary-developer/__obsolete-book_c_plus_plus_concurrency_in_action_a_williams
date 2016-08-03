@@ -126,3 +126,23 @@ In order to use std::atomic<UDT> for some user-defined type UDT,
 - every base class and non-static data member of a 
   user-defined type must also have a trivial copy-assignment operator;
 - the type must be bitwise equality comparable.
+
+
+The synchronizes-with relationship
+----------------------------------
+
+The *synchronizes-with* relationship is something that you can get 
+only between operations on atomic types 
+(operations on a data structure might provide this relationship
+ if the data structure contains atomic types and the operation
+ on that data structure preform the appropriate atomic operations
+ internally).
+
+The basic idea is this: a suitably tagged atomic write operation *W*
+on variable *x* synchronizes-with a suitably tagged atomic read 
+operation on *x* that reads the value stored by either that write 
+(*W*), or a subsequent atomic write operation on *x* by the same 
+thread that performed the initial write *W*, or a sequence of atomic
+read-modify-write operations on *x* (such as *fetch_add()* or
+*compare_exchange_weak()*) by any thread, where value read by
+the first thread in the sequence is the value written by *W*.
