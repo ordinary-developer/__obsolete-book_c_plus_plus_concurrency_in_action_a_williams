@@ -90,7 +90,7 @@ with a supplied expected value and stores the supplied desired value
 if they are equal. If the values aren't equal, the expected value
 is updated with the actual value of the atomic variable. 
 The return type of the compare/exchange functions is a bool, which
-is ture if the store was performed and false otherwise.
+is true if the store was performed and false otherwise.
 
 
 Operations on std::atomic<T*>: pointer arithmetic
@@ -106,7 +106,7 @@ It has the next member functions:
 - store();
 - exchange();
 - compare_exchange_weak();
-- compare_exchange_stro();
+- compare_exchange_strong();
 - fetch_add();     - |
 - fetch_sub();       | 
 - operator +=;       | pointer arithmetic
@@ -119,7 +119,7 @@ The std::atomic<> primary class template
 ----------------------------------------
 
 In order to use std::atomic<UDT> for some user-defined type UDT, 
-- this must have a trivial copy-assignment opertor
+- this must have a trivial copy-assignment operator
   (the type must not have any virtual functions or virtual base 
    classes and must use the compiler-generated copy-assignment
    operator);
