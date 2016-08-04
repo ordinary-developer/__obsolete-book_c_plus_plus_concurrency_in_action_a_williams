@@ -179,3 +179,12 @@ Although there are siz ordering options, they represent three models:
    memory_order_acq_rel)
 - *relaxed* ordering  
   (memory_order_relaxed)
+
+
+Sequentially consistent ordering
+--------------------------------
+
+If all operations on instances of atomic types are sequentially 
+consistent, teh behaviour of a multithread program is as if all these
+operations were performed in some particular sequence by a single
+thread.
