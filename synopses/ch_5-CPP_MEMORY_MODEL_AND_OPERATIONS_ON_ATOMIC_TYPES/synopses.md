@@ -223,3 +223,10 @@ that reads the value written*. This means that different threads
 can still see different orderings, but these orderings are 
 restricted.
 
+
+Data dependency with acquire-release ordering and memory_order_consume
+----------------------------------------------------------------------
+
+There are tow new relations that deal with data dependencies:
+- dependency-ordered-before;
+- carries-a-dependency-to.
