@@ -188,3 +188,16 @@ If all operations on instances of atomic types are sequentially
 consistent, teh behaviour of a multithread program is as if all these
 operations were performed in some particular sequence by a single
 thread.
+
+
+Relaxed ordering
+----------------
+
+Operations on the same variable within a single thread still obey
+happens-before relationships, but there's almost no requirement on
+ordering relative to other threads.
+
+The only requirement is that access to a single atomic variable 
+from the same thread can't be reordered; once a given thread has 
+seen a particular value of an atomic varable, a subsequent read by
+that thread can't retrieve an earlier value of the variable.
