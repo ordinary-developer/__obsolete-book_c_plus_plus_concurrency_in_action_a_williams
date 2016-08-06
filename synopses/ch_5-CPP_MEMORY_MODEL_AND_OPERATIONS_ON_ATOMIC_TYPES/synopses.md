@@ -201,3 +201,25 @@ The only requirement is that access to a single atomic variable
 from the same thread can't be reordered; once a given thread has 
 seen a particular value of an atomic varable, a subsequent read by
 that thread can't retrieve an earlier value of the variable.
+
+
+Acquire-release ordering
+------------------------
+
+Acquire-release ordering still has no total order of operations,
+but it does introduce some synchronization. 
+
+Under this ordering model, atomic loads are *aqcuire* operations
+(*memory_order_acquire*), atomic stores are *release* operations
+(*memory_order_release*), and atomic read-modify-write operations
+(such as *fetch_add()* or *exchange()*) are either *acquire*,
+*release*, or both (*memory_order_acq_rel*).
+
+Synchronization is pairwise, between the thread that does the release
+and the thread that does the acquire.
+
+*A release operation synchronizes-with an acquire operation 
+that reads the value written*. This means that different threads
+can still see different orderings, but these orderings are 
+restricted.
+
