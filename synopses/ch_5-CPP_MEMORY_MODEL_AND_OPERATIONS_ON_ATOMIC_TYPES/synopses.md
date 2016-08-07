@@ -244,3 +244,23 @@ the chain of operations constitutes a release sequence and the initial
 store synchronizes-with (for *memory_order_acquire* or 
 *memory_order_seq_cst*) or dependency-ordered-before
 (for memory_order_consume) the final load.
+
+
+Fences
+------
+
+Fences (memory barriers) are operations that enforce memory-ordering 
+constraints without modifying any data and are typically combined 
+with atomic operations that use the *memory_order_relaxed* ordering 
+constraints.
+
+If an acquire operation sees the result of a store that takes place
+after a release fence, the fence synchronizes-with that acquire
+operation; and if a load that takes place before an acquire fence
+sees the result of a release operation, the release operation 
+synchronizes-with the acquire fence.
+
+For fences on both sides if a load that takes place before the 
+acquire fence sees a value written by a store that takes place after
+the release fence, the release fence synchronizes-with the aqcuire 
+fence.
