@@ -230,3 +230,17 @@ Data dependency with acquire-release ordering and memory_order_consume
 There are tow new relations that deal with data dependencies:
 - dependency-ordered-before;
 - carries-a-dependency-to.
+
+
+Release sequences and synchronizes-with
+---------------------------------------
+
+If the store is tagged with *memory_order_release*, 
+*memory_order_acq_rel*, or *memory_order_seq_cst*, 
+and the load is tagged with *memory_order_consume*,
+*memory_order_acquire*, or *memory_order_seq_cst*, and each operation
+in the chain loads the value written by the previous operation, then
+the chain of operations constitutes a release sequence and the initial
+store synchronizes-with (for *memory_order_acquire* or 
+*memory_order_seq_cst*) or dependency-ordered-before
+(for memory_order_consume) the final load.
