@@ -35,4 +35,6 @@ Some aspects about genuine concurret access:
 - can a simple change to the data structure improve the opportunities
   for concurrency without affecting the operational semantics?
 
-
+The design of lock based concurrent data structures 
+is all about ensuring that the right mutex is locked when accessing
+data and ensuring that the lock is held for a minimum amout of time.
