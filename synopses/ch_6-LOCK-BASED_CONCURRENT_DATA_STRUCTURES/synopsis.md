@@ -13,7 +13,7 @@ for concurrency*.
 Guidelines for designing data structures for concurrency
 --------------------------------------------------------
 
-Basics of how to made data structures thread-safe
+Basics of how to make data structures thread-safe
 - ensure that no thread can see a state where the invariants 
   of the data structure have been broken 
   by the actions of another thread;
@@ -26,7 +26,7 @@ Basics of how to made data structures thread-safe
   when using the data structure by restricting the scope of locks
   and avoiding nested locks where possible.
 
-Some aspects about genuine concurret access:
+Some aspects about genuine concurrent access:
 - can the scope of locks be restricted to allow some parts 
   of an operations to be performed outside the lock?
 - can different parts of the data structure be protected 
