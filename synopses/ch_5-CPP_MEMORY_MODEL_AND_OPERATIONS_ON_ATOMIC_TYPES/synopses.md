@@ -1,6 +1,85 @@
 C++ MEMORY MODEL AND OPERATIONS ON ATOMIC TYPES
 ===============================================
 
+Object and memory locations
+---------------------------
+
+The C++ Standard defines an object as a "region of storage",
+although it goes on to assign properties to these objects, 
+such as their type and lifetime.
+
+Some of these objects are simple values of a fundamental type
+such as int or float, 
+whereas others are instances of user-defined classes.
+Some objects (such as arrays, instances of derived classes,
+and instances of classes with non-static data members)
+have subobjects, but others don't.
+
+An object is stored in one or more memory locations.
+Each such memory locations is either an object (or subobject) 
+of a scalar type such as unsigned short or my_class* 
+or a sequence of adjacent bif fields.
+Though adajcent bitfields are distinct objects, 
+they are still counted as the same memory location.
+
+There are four important things:
+- every variable is an object, including those 
+  that are members of other objects;
+- every object occupies at least one memory location;
+- variables of fundamental types such as int or char
+  are exactly one memory location, whatever their size,
+  even if they are adjacent or part of an array;
+- adjacent bit fields are part of the same memory location.
+
+
+Objects, memory locations, and concurrency
+------------------------------------------
+
+If two threads access *separate* memory locations, there's no problem.
+
+If two threads access *the same* memory location, 
+then you can have the next situations:
+- if neither thread is updating the memory location, you're fine;
+- if either thread is modifying the data,
+  there is a potential for a race condition. 
+
+In order to avoid the race condition, 
+here has to be an enforced ordering 
+between the accesses in the two threads.
+
+If more than two threads access the same memory location, 
+each pair of accesses must have a defined ordering.
+
+
+Modification orders
+-------------------
+
+Every object in a C++ program has a defined modification order
+composed of all the writes to that object
+from all threads in the program, 
+starting with the object's initialization.
+
+In most cases this order will vary between runs, 
+but in any execution of the program all threads in the system
+must agree on the order.
+
+If the object in question isn't one of the atomic types,
+you're responsible for marking certain
+that there is sufficient synchronization to ensure that
+threads agree on the modification order of each variable.
+If different threads see distinct sequences of values
+for a single variable,
+you have a data race and undefined behavior.
+
+If you do use atomic operations, the compiler is responsible 
+for ensuring that the necessary synchronization is in place.
+
+Although all threads must agree on the modification orders
+of each individual object in a program, 
+they don't necessarily have to agree 
+on the relative order of operations on separate objects.
+
+
 Atomic operations and types in C++
 ----------------------------------
 
