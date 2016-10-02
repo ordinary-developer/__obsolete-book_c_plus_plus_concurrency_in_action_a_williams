@@ -159,6 +159,10 @@ you can construct it from a nonatomic bool.
 Assignment operators that atomic types support return values
 (of the corresponding nonatomic type) rather than references.
 
+
+Storing a new value (or not) depending on the current value
+-----------------------------------------------------------
+
 The compare/exchange operation (compare_exchange_weak/strong)
 compares the value of the atomic variable 
 with a suplied expected value and stores the supplied disired value
@@ -186,18 +190,6 @@ while (!b.compare_exchange_weak(expected, true) && !expected);
 compare_exchange_strong() is guaranteed to return false  
 only if the actual value wasn't equal to the expected value.
 this can eliminate the need for loops.
-
-
-Storing a new value (or not) depending on the current value
------------------------------------------------------------
-
-compare_exchange_weak() and compare_exchange_strong() member functions
-(compare/exchange operations) compare the value of the atomic variable
-with a supplied expected value and stores the supplied desired value
-if they are equal. If the values aren't equal, the expected value
-is updated with the actual value of the atomic variable. 
-The return type of the compare/exchange functions is a bool, which
-is true if the store was performed and false otherwise.
 
 
 Operations on std::atomic<T*>: pointer arithmetic
