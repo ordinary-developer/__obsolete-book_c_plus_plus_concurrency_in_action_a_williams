@@ -213,6 +213,19 @@ It has the next member functions:
 - operator ++;       |
 - operator --      - |
 
+Operators "+=", "-=", "++" and "--" atomically change
+the atomic variable's value and return a plain pointer (not a ref.)
+that also points to the atomic variable's value.
+Specifying the ordering semantics isn't possible 
+for the operator forms. These forms therefore 
+always have memory_order_seq_cst semantics.
+
+fetch_and() and fetch_sub() do atomic addition and subtraction,
+but they return the original value (before operation performing).
+Because fetch_add() and fetch_sub() are read-modify-write operations,
+they can have any of the memory-ordering tags 
+and can participate in a release sequence.
+
 
 The std::atomic<> primary class template
 ----------------------------------------
