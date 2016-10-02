@@ -159,6 +159,34 @@ you can construct it from a nonatomic bool.
 Assignment operators that atomic types support return values
 (of the corresponding nonatomic type) rather than references.
 
+The compare/exchange operation (compare_exchange_weak/strong)
+compares the value of the atomic variable 
+with a suplied expected value and stores the supplied disired value
+if they (atomic variable's value and a supplied expected value) 
+are equal.
+If the values aren't equal, 
+he expected value is updated is updated with the actual value
+of the atomic variable.
+The return type of the compare/exchange function is a bool, 
+which is true if the store was performed and false otherwise.
+
+For compare_exchange_weak(), the store might be not successful 
+even if the original value of the variable 
+was equal to the expected value,
+in which case the value of the variable is unchanged 
+and the return value of compare_exchnage_weak is false. 
+Because compare_exchange_weak() can fail spuriosly, 
+it must typically be used in a loop:
+```cpp
+bool expected = false;
+extern atomic<bool> b; // set somewhere else
+while (!b.compare_exchange_weak(expected, true) && !expected);
+```
+
+compare_exchange_strong() is guaranteed to return false  
+only if the actual value wasn't equal to the expected value.
+this can eliminate the need for loops.
+
 
 Storing a new value (or not) depending on the current value
 -----------------------------------------------------------
